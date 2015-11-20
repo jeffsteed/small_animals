@@ -1,0 +1,30 @@
+<script type="text/javascript">
+var animalArray = ["/hedgehog", "/bearcub", "/owl", "/koala", "/bunny"];
+
+for (var animal in animalArray) {
+  getAnimal(animalArray[animal]);
+}
+
+function getAnimal(animal) {
+  $.getJSON(animal, function(data) {
+    for (var item in data) {
+      var li = document.createElement('li');
+      if (item == "picture_url") {
+        var img = document.createElement('img');
+        img.src = data[item];
+        var li2 = document.createElement('li');
+        li2.innerText = item + ": " + data[item];
+        document.getElementById('animals').appendChild(li2);
+        li.appendChild(img);
+      } else {
+        li.innerText = item + ": " + data[item];
+      }
+      document.getElementById('animals').appendChild(li);
+    }
+  });
+}
+
+</script>
+<div id="animals">
+
+</div>
